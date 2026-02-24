@@ -51,7 +51,7 @@ function login() {
     if(query.includes("' OR '1'='1") || query.includes("' OR 1=1 --")) {
         document.getElementById("output").innerHTML =
             "<h3 style='color:lime;'>Access Granted!</h3>" +
-            "<p>Flag: VYUGAM{sqli_access_granted}</p>";
+            "<p>Flag: VYUGAM{access_granted}</p>";
     } else {
         document.getElementById("output").innerHTML =
             "<p style='color:red;'>Invalid Credentials</p>";
