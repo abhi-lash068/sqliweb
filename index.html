@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #111;
+            color: white;
+            text-align: center;
+            padding-top: 100px;
+        }
+        input {
+            padding: 10px;
+            margin: 5px;
+            width: 250px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: crimson;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Admin Control Panel</h2>
+
+<input type="text" id="username" placeholder="Username"><br>
+<input type="password" id="password" placeholder="Password"><br>
+<button onclick="login()">Login</button>
+
+<p id="output"></p>
+
+<script>
+function login() {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+
+    // Simulated vulnerable SQL query
+    var query = "SELECT * FROM users WHERE username='" 
+                + username + 
+                "' AND password='" 
+                + password + "'";
+
+    console.log("Executing Query: " + query);
+
+    // Simulated SQL injection detection logic
+    if(query.includes("' OR '1'='1") || query.includes("' OR 1=1 --")) {
+        document.getElementById("output").innerHTML =
+            "<h3 style='color:lime;'>Access Granted!</h3>" +
+            "<p>Flag: VYUGAM{sqli_access_granted}</p>";
+    } else {
+        document.getElementById("output").innerHTML =
+            "<p style='color:red;'>Invalid Credentials</p>";
+    }
+}
+</script>
+
+</body>
+</html>
