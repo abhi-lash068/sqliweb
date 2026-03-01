@@ -39,7 +39,6 @@ function login() {
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
 
-    // Simulated vulnerable SQL query
     var query = "SELECT * FROM users WHERE username='" 
                 + username + 
                 "' AND password='" 
@@ -47,15 +46,20 @@ function login() {
 
     console.log("Executing Query: " + query);
 
-    // Simulated SQL injection detection logic
-    if(query.includes("' OR '1'='1") || query.includes("' OR 1=1 --")) {
-        document.getElementById("output").innerHTML =
-            "<h3 style='color:lime;'>Access Granted!</h3>" +
-            "<p>hey you got the Flag: VYUGAM{access_granted}</p>";
+    // Basic injection detection (hidden logic)
+    if(username.includes("'") && password === "") {
+        grantAccess();
     } else {
         document.getElementById("output").innerHTML =
             "<p style='color:red;'>Invalid Credentials</p>";
     }
+}
+
+function grantAccess() {
+    const encodedFlag = "VllVR0FNe2FjY2Vzc19ncmFudGVkfQ=="; 
+    document.getElementById("output").innerHTML =
+        "<h3 style='color:lime;'>Access Granted!</h3>" +
+        "<p>Flag: " + atob(encodedFlag) + "</p>";
 }
 </script>
 
